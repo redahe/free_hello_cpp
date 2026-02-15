@@ -6,7 +6,7 @@ other POSIX systems. Includes inline asm for necessary syscall invocations and
 a CMake script focused on optimizing the binary size.
 
 
-# Motivation:
+# Motivation
    Tiny programs like "Hello World", should not be above a kilobyte in the
 compiled form by default. On x86_64 Linux the resulting binary is only 656
 bytes. 
@@ -18,20 +18,14 @@ projects with no dynamic memory allocation/custom memory management or
 demoscene).
 
 
-# Requirements: 
 
-  make, cmake, c++17 or above, strip (optional for minimizing binary size)
+# Build instructions
+
+Requirements: make, cmake, c++17 or above.<br>
+Optional: strip (for minimizing the binary size).
 
 
-# Build instructions:
+Run `make` from the project directory to build the project.<br>
+Run `make help` to see all supported commands.
 
 
-Run:
-```
-    make
-```
-
-To see all options:
-```
-    make help
-```

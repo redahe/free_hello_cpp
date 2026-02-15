@@ -11,13 +11,21 @@ int main();
 
 namespace _system {
 
+constexpr int kSTDIN_FD = 0;
+constexpr int kSTDOUT_FD = 1;
+constexpr int kSTDERR_FD = 2;
+
 /* Write string to a file using file descriptor.
  * Return: the number of the written characters or -errno
  */
 [[nodiscard]] inline ssize_t write(const int fd, std::string_view msg);
 
-/* Exit the process
- */
+// Convenience function to write to STDOUT
+[[nodiscard]] inline ssize_t write(std::string_view msg) {
+  return write(kSTDOUT_FD, msg);
+}
+
+// Exit the process
 inline void exit(const int status);
 
 } // namespace _system
@@ -29,13 +37,13 @@ void _start() { _system::exit(main()); }
 }
 // --------------Freestanding system call implementations-------------
 #if defined(__x86_64__)
-#include "_system_linux_x86_64.hpp"
+#include "system_linux_x86_64.hpp"
 #else
-#error Free standing implementation is not provided for the current system
+#error Freestanding implementation is not provided for the current system
 #endif
 
 #else
 // -----Fallback for a hosted build in generic POSIX environment-------
-#include "_system_posix.hpp"
+#include "system_posix.hpp"
 
 #endif
