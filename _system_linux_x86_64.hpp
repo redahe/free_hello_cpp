@@ -9,14 +9,14 @@
 
 namespace _system {
 
-void exit(const int status) {
+inline void exit(const int status) {
   asm volatile("syscall"
                :
                : "a"(60), "D"((long)(status & 255))
                : "rcx", "r11", "memory");
 }
 
-[[nodiscard]] ssize_t write(const int fd, std::string_view msg) {
+[[nodiscard]] inline ssize_t write(const int fd, std::string_view msg) {
   ssize_t ret;
   asm volatile("syscall"
                : "=a"(ret)

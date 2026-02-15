@@ -11,19 +11,19 @@ int main();
 
 namespace _system {
 
-/* Write string_view to a file by a file descriptor.
+/* Write string to a file using file descriptor.
  * Return: the number of the written characters or -errno
  */
-[[nodiscard]] ssize_t write(const int fd, std::string_view msg);
+[[nodiscard]] inline ssize_t write(const int fd, std::string_view msg);
 
 /* Exit the process
  */
-void exit(const int status);
+inline void exit(const int status);
 
 } // namespace _system
 
 #if __STDC_HOSTED__ == 0
-// ------------Program entry point/exit in the freestanding mode------
+// -----Program entry point/exit logic for the freestanding mode------
 extern "C" {
 void _start() { _system::exit(main()); }
 }
@@ -35,7 +35,7 @@ void _start() { _system::exit(main()); }
 #endif
 
 #else
-// ---------Fallback for hosted POSIX environment---------------------
+// -----Fallback for a hosted build in generic POSIX environment-------
 #include "_system_posix.hpp"
 
 #endif

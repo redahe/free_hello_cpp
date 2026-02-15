@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 
 if(${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_BINARY_DIR})
-    message(FATAL_ERROR "Run cmake from a build directory")
+    message(FATAL_ERROR "Run cmake from a build directory!")
 endif()
 
 
@@ -119,15 +119,8 @@ add_custom_command(TARGET hello POST_BUILD
 )
 # ==================================================
 
+
 # ============= Print the results ==================
-add_custom_command(TARGET hello POST_BUILD
-  COMMAND readelf -S $<TARGET_FILE:hello>
-  COMMENT "Section headers:"
-)
-add_custom_command(TARGET hello POST_BUILD
-  COMMAND size -A $<TARGET_FILE:hello>
-  COMMENT "Section sizes:"
-)
 add_custom_command(TARGET hello POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E echo "--------------------------------"
     COMMAND ls -lh $<TARGET_FILE:hello>
