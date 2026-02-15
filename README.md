@@ -5,6 +5,7 @@ mode on Linux x86_64 and falls back to rely on the standard library on
 other POSIX systems. Includes inline asm for necessary syscall invocations and
 a CMake script focused on optimizing the binary size.
 
+
 # Motivation:
    Tiny programs like "Hello World", should not be above a kilobyte in the
 compiled form by default. On x86_64 Linux the resulting binary is only 656
@@ -17,10 +18,20 @@ projects with no dynamic memory allocation/custom memory management or
 demoscene).
 
 
+# Requirements: 
+
+  make, cmake, c++17 or above, strip (optional for minimizing binary size)
+
+
 # Build instructions:
+
+
+Run:
 ```
-    mkdir build 
-    cd build
-    cmake ..
     make
+```
+
+To see all options:
+```
+    make help
 ```

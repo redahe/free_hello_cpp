@@ -108,15 +108,20 @@ endif()
 
 # ============= Post process the binary============
 # Strip unnecessary sections from the binary
-add_custom_command(TARGET hello POST_BUILD
-  COMMAND ${CMAKE_STRIP} 
-      --strip-all 
-      --remove-section .comment 
-      --remove-section .note 
-      --remove-section .note.gnu.property 
-      $<TARGET_FILE:hello>
-  COMMENT "Striping the binary"
-)
+
+if(CMAKE_STRIP)
+  add_custom_command(TARGET hello POST_BUILD
+    COMMAND ${CMAKE_STRIP} 
+        --strip-all 
+        --remove-section .comment 
+        --remove-section .note 
+        --remove-section .note.gnu.property 
+        $<TARGET_FILE:hello>
+    COMMENT "Striping the binary"
+  )
+else()
+  message(STATUS "CMAKE_STRIP not found - skipping post-build strip step.")
+endif()
 # ==================================================
 
 

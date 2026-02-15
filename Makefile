@@ -71,7 +71,7 @@ format:
 compcheck: clean
 	@echo "$(BLUE) Checking compilation compatibility$(BLUE)"
 	cmake -B $(BUILD_DIR) -S .\
-		-DCMAKE_SYSTEM_NAME=GENERIC\
+		-DCMAKE_SYSTEM_NAME=Generic\
 		-DCMAKE_SYSTEM_PROCESSOR=x86_64 \
 		-DFORCE_NO_LTO=0
 	$(MAKE) build
@@ -86,4 +86,4 @@ help:
 	@echo "make debug       - Open in debugger ($(DEBUGGER))"
 	@echo "make check       - Run static analysis ($(CHECKER))"
 	@echo "make format      - Auto-format cpp/hpp files ($(FORMATTER))"
-	@echo "make compcheck   - Check compliation for a generic system"
+	@echo "make compcheck   - Check compliation for generic system"
