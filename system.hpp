@@ -15,7 +15,7 @@ constexpr int kSTDIN_FD = 0;
 constexpr int kSTDOUT_FD = 1;
 constexpr int kSTDERR_FD = 2;
 
-/* Write string to a file using the file descriptor.
+/* Write string to a file using the file descriptor
  * Return: the number of the written characters or -errno
  */
 [[nodiscard]] inline ssize_t write(const int fd, std::string_view str);
@@ -24,6 +24,10 @@ constexpr int kSTDERR_FD = 2;
 [[nodiscard]] inline ssize_t write(std::string_view str) {
   return write(kSTDOUT_FD, str);
 }
+
+// Prohibit implicit length computation
+[[nodiscard]] inline ssize_t write(const int fd, const char *str) = delete;
+[[nodiscard]] inline ssize_t write(const char *str) = delete;
 
 // Exit the process
 inline void exit(const int status);
