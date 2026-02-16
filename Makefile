@@ -11,7 +11,7 @@ GREEN  := \033[32m
 YELLOW := \033[33m
 RESET  := \033[0m
 
-.PHONY: all configure build clean run size debug check format help
+.PHONY: all configure build clean run size sstrip debug check format help
 
 all: build
 
@@ -68,6 +68,13 @@ format:
 	$(CPP_HPP_FILES) |xargs $(FORMATTER)
 
 
+sstrip: build
+	@echo "$(BLUE)Remove all non essintail headers$(RESET)"
+	sstrip $(BIN_PATH)
+	@echo "-------------------------------------------"
+	@echo "$(YELLOW)Final binary size:$(RESET)" `stat -c %s $(BIN_PATH)` "bytes"
+	@echo "-------------------------------------------"
+
 compcheck: clean
 	@echo "$(BLUE) Checking compilation compatibility$(BLUE)"
 	cmake -B $(BUILD_DIR) -S .\
@@ -82,7 +89,8 @@ help:
 	@echo "make build       - Compile the project"
 	@echo "make run         - Build and execute"
 	@echo "make clean       - Delete buid artifacts"
-	@echo "make size        - Deep dive into binary size"
+	@echo "make size        - Binary size statistics"
+	@echo "make sstrip      - Run sstrip for the most aggresive ELF pruning"
 	@echo "make debug       - Open in debugger ($(DEBUGGER))"
 	@echo "make check       - Run static analysis ($(CHECKER))"
 	@echo "make format      - Auto-format cpp/hpp files ($(FORMATTER))"

@@ -7,13 +7,13 @@ a CMake script focused on optimizing the binary size.
 
 
 ## Motivation
-   Tiny programs like "Hello World", should not be above a kilobyte in the
-compiled form by default. On x86_64 Linux the resulting binary is only 656
-bytes. 
+   Tiny programs like "Hello World" should not be larger than a kilobyte in the
+compiled form by default. The resulting executable of this project on the
+target platform is only 656 bytes (372 bytes after sstrip). 
 
-   The project could be used as a template for minimalist/hobbyist C++ projects 
+   This project could be used as a template for minimalist/hobbyist C++ projects 
 that should support a fallback portability out of the box. 
-(Think about small utilities that could fit a standard memory page of size 4Kb, 
+(Think about small utilities that could fit a single memory page of size 4Kb, 
 projects with no dynamic memory allocation/custom memory management or
 demoscene).
 
@@ -22,10 +22,9 @@ demoscene).
 ## Build instructions
 
 Requirements: make, cmake, c++17 or above.  
-Optional: strip (for minimizing the binary size).
+Optional: strip, sstrip (for minimizing the binary size).
 
 
 Run `make` from the project directory to build the project.  
+Run `make sstrip` to run sstrip after and get the maximum pruning.  
 Run `make help` to see all supported commands.
-
-
