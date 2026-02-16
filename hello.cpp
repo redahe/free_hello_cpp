@@ -6,6 +6,6 @@
 using namespace std::string_view_literals;
 
 int main() {
-  std::ignore = _system::write("Hello World!\n"sv);
+  std::ignore = _system::write("Hello, World!\n"sv);
   return 0;
 }

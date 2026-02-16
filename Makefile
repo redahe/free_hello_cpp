@@ -90,7 +90,7 @@ help:
 	@echo "make run         - Build and execute"
 	@echo "make clean       - Delete buid artifacts"
 	@echo "make size        - Binary size statistics"
-	@echo "make sstrip      - Run sstrip for the most aggresive ELF pruning"
+	@echo "make sstrip      - Run sstrip for aggressive ELF size reduction"
 	@echo "make debug       - Open in debugger ($(DEBUGGER))"
 	@echo "make check       - Run static analysis ($(CHECKER))"
 	@echo "make format      - Auto-format cpp/hpp files ($(FORMATTER))"

@@ -15,7 +15,7 @@ constexpr int kSTDIN_FD = 0;
 constexpr int kSTDOUT_FD = 1;
 constexpr int kSTDERR_FD = 2;
 
-/* Write string to a file using the file descriptor
+/* Write a string to a file identified by the file descriptor
  * Return: the number of the written characters or -errno
  */
 [[nodiscard]] inline ssize_t write(const int fd, std::string_view str);
