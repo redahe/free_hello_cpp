@@ -13,8 +13,8 @@
 
 namespace _system {
 
-[[nodiscard]] inline ssize_t write(const int fd, std::string_view msg) {
-  ssize_t ret = ::write(fd, msg.data(), msg.size());
+[[nodiscard]] inline ssize_t write(const int fd, std::string_view str) {
+  ssize_t ret = ::write(fd, str.data(), str.size());
   if (ret == -1) {
     return -errno;
   }

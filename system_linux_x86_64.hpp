@@ -16,11 +16,11 @@ inline void exit(const int status) {
                : "rcx", "r11", "memory");
 }
 
-[[nodiscard]] inline ssize_t write(const int fd, std::string_view msg) {
+[[nodiscard]] inline ssize_t write(const int fd, std::string_view str) {
   ssize_t ret;
   asm volatile("syscall"
                : "=a"(ret)
-               : "0"(1), "D"((long)fd), "S"(msg.data()), "d"(msg.size())
+               : "0"(1), "D"((long)fd), "S"(str.data()), "d"(str.size())
                : "rcx", "r11", "memory");
   return ret;
 }

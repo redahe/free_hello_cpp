@@ -15,14 +15,14 @@ constexpr int kSTDIN_FD = 0;
 constexpr int kSTDOUT_FD = 1;
 constexpr int kSTDERR_FD = 2;
 
-/* Write string to a file using file descriptor.
+/* Write string to a file using the file descriptor.
  * Return: the number of the written characters or -errno
  */
-[[nodiscard]] inline ssize_t write(const int fd, std::string_view msg);
+[[nodiscard]] inline ssize_t write(const int fd, std::string_view str);
 
 // Convenience function to write to STDOUT
-[[nodiscard]] inline ssize_t write(std::string_view msg) {
-  return write(kSTDOUT_FD, msg);
+[[nodiscard]] inline ssize_t write(std::string_view str) {
+  return write(kSTDOUT_FD, str);
 }
 
 // Exit the process
