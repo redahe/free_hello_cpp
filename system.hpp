@@ -25,7 +25,7 @@ constexpr int kSTDERR_FD = 2;
   return write(kSTDOUT_FD, str);
 }
 
-// Prohibit implicit length computation
+// Prohibit implicit length computation in write functions
 [[nodiscard]] inline ssize_t write(const int fd, const char *str) = delete;
 [[nodiscard]] inline ssize_t write(const char *str) = delete;
 
