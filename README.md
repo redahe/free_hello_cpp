@@ -9,9 +9,11 @@ focused on optimizing the binary size.
 
 ## Motivation
    Tiny programs like "Hello, World!" should not be larger than a kilobyte in
-the compiled form by default. This project achieves this goal - the resulting
-size of the executable on the target platform is only 656 bytes (373 bytes
-after sstrip).
+the compiled form by default. This project achieves this goal - on the target
+platform the program payload in the resulting executable is only 53 bytes of
+machine code identical to the one that would be produced by a handcrafted
+assembly code, the ELF binary size is 656 bytes, 373 bytes after sstrip and 
+could be reduced further by messing with the ELF program headers.
 
    This program and the build scripts could be used as an outline for
 minimalist/hobbyist freestanding C++ projects with some portability in mind.
