@@ -1,8 +1,6 @@
 
 # "Hello, World!" on freestanding C++
 
-## Disclaimer
-
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -39,7 +37,7 @@ projects with no dynamic memory allocation or projects with custom memory
 management, demoscene.
 
 
-# The default security settings
+## The default security settings
 
 By default the program compiles with the following compiler and linker
 flags, which disable the standard security features in the compiled
