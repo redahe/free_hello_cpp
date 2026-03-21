@@ -1,11 +1,25 @@
+
 # "Hello, World!" on freestanding C++
+
+## Disclaimer
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+
+## Description
 
    A "Hello, World!" implementation on freestanding C++ to run on Linux x86_64,
 supports compilation for other POSIX systems by falling back to the hosted
 implementation.
 Includes inline asm for necessary syscall invocations and a CMake script
-focused on optimizing the binary size (*it by default gives up many
-security protections*, which can be tweaked in the settings).
+focused on optimizing the binary size (**it by default gives up many
+security protections**, which can be tweaked in the settings).
 
 
 ## Motivation
@@ -31,11 +45,11 @@ By default the program compiles with the following compiler and linker
 flags, which disable the standard security features in the compiled
 code and the executable in order to decrease the result binary size:
 
-  -fno-stack-protector
-  -fcf-protection=none
-  -Wl,-z,norelro
-  -Wl,-z,noseparate-code
-  -Wl,-z,common-page-size=16
+  -fno-stack-protector  
+  -fcf-protection=none  
+  -Wl,-z,norelro  
+  -Wl,-z,noseparate-code  
+  -Wl,-z,common-page-size=16  
 
 Remove/change these settings if the security aspect is important,
 (the stack protector relies on functions/variables defined in libc
