@@ -46,6 +46,8 @@ target_link_options(hello PRIVATE
 # --------Define flags that trade security for binary size------
 set(OPTIMIZE_SIZE_OVER_SECURITY_COMPILE_FLAGS
   -fno-stack-protector             # No stack overflow protection
+  -fcf-protection=none             # No control flow protection
+
 )
 
 set(OPTIMIZE_SIZE_OVER_SECURITY_LINK_FLAGS
