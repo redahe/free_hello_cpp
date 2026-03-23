@@ -6,21 +6,25 @@ int main();
 void init();
 
 extern "C" {
-  void _start() {init(); _system::exit(main()); }
+void _start() {
+  init();
+  _system::exit(main());
+}
 }
 
 // ---------------Freestanding stack protector implementation----------
 #if defined(__SSP__) || defined(__SSP_STRONG__) || defined(__SSP_ALL__)
 
-#include <tuple>       // For std::ignore
+#include <tuple> // For std::ignore
 using namespace std::string_view_literals;
 
 extern "C" {
-  void __stack_chk_fail(void) {
-      std::ignore = _system::write(_system::kSTDERR_FD, "\nStack smashing detected!"sv);
-      _system::crash();
- }
- uintptr_t __stack_chk_guard = 0xD100B22CA55DF88D;
+void __stack_chk_fail(void) {
+  std::ignore =
+      _system::write(_system::kSTDERR_FD, "\nStack smashing detected!"sv);
+  _system::crash();
+}
+uintptr_t __stack_chk_guard = 0xD100B22CA55DF88D;
 }
 
 void init() {
@@ -31,7 +35,6 @@ void init() {
 }
 
 #else
-void init() {
-}
+void init() {}
 #endif
 #endif

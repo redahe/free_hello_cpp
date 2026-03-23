@@ -7,7 +7,6 @@
 #include <string_view> // For std::string_view
 #include <sys/types.h> // For ssize_t
 
-
 namespace _system {
 
 constexpr int kSTDIN_FD = 0;
@@ -29,10 +28,10 @@ constexpr int kSTDERR_FD = 2;
 [[nodiscard]] inline ssize_t write(const char *str) = delete;
 
 // Exit the process
- [[noreturn]] inline void exit(const int status);
+[[noreturn]] inline void exit(const int status);
 
 } // namespace _system
-  
+
 #if __STDC_HOSTED__ == 0
 // --------------Freestanding system call implementations-------------
 #if defined(__x86_64__)
