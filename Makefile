@@ -21,7 +21,7 @@ $(BUILD_DIR): CMakeLists.txt
 
 configure: $(BUILD_DIR)
 
-conf_no_security:
+no_sec:
 	@echo "$(BLUE)Running CMake:$(RESET)"
 	cmake -DREDUCE_SECURITY_FOR_BIN_SIZE=ON -B $(BUILD_DIR) -S .
 
@@ -99,14 +99,14 @@ compcheck: clean
 
 help:
 
-	@echo "make conf_no_security    - Configure the project to disable"\
-		                " security features (to minimize the bin size)"
-	@echo "make build       - Compile the project"
-	@echo "make run         - Build and execute"
-	@echo "make clean       - Delete buid artifacts"
-	@echo "make size        - Elf size statistics"
-	@echo "make sstrip      - Run sstrip for aggressive ELF size reduction"
-	@echo "make debug       - Open in debugger ($(DEBUGGER))"
-	@echo "make check       - Run static analysis ($(CHECKER))"
-	@echo "make format      - Auto-format cpp/hpp files ($(FORMATTER))"
-	@echo "make compcheck   - Check compliation for generic system"
+	@echo "make no_sec     - Configure the project to disable all"\
+		               "security features (to minimize the bin size)"
+	@echo "make build      - Compile the project"
+	@echo "make run        - Build and execute"
+	@echo "make clean      - Delete buid artifacts"
+	@echo "make size       - Elf size statistics"
+	@echo "make sstrip     - Run sstrip for aggressive ELF size reduction"
+	@echo "make debug      - Open in debugger ($(DEBUGGER))"
+	@echo "make check      - Run static analysis ($(CHECKER))"
+	@echo "make format     - Auto-format cpp/hpp files ($(FORMATTER))"
+	@echo "make compcheck  - Check compliation for generic system"
