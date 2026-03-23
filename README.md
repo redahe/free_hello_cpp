@@ -28,7 +28,7 @@ on the target platform, with all security features disabled the program payload
 in the resulting executable is only 48 bytes(33 bytes of the machine code
 identical to the one that would be produced by a handcrafted assembly code and
 15 bytes for the string literal). The ELF binary size is 512 bytes,
-225 bytes after sstrip and could be reduced further by messing with the ELF
+224 bytes after sstrip and could be reduced further by messing with the ELF
 program headers.
 
    This program and the build scripts could be used as an outline for
