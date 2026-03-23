@@ -25,10 +25,11 @@ requires giving up many security features provided by the compiler**).
    Tiny single-user programs like "Hello, World!" should not be larger than a
 kilobyte in the compiled form by default. This project achieves this goal -
 on the target platform, with all security features disabled the program payload
-in the resulting executable is only 48 bytes of the machine code identical
-to the one that would be produced by a handcrafted assembly code,
-the ELF binary size is 512 bytes, 225 bytes after sstrip and could be reduced
-further by messing with the ELF program headers.
+in the resulting executable is only 48 bytes(33 bytes of the machine code
+identical to the one that would be produced by a handcrafted assembly code and
+15 bytes for the string literal). The ELF binary size is 512 bytes,
+225 bytes after sstrip and could be reduced further by messing with the ELF
+program headers.
 
    This program and the build scripts could be used as an outline for
 minimalist/hobbyist freestanding C++ projects with some portability in mind.
@@ -60,7 +61,7 @@ achieve the minimal binary size :
 Requirements: make, cmake, c++17 or above.  
 Optional: strip, sstrip (for minimizing the binary size).
 
-Optionally run `make conf_no_sec` to disable all 
+Optionally run `make no_sec` to disable all 
 security features to achieve the minimal binary size.
 Run `make` from the project directory to build the project.  
 Run `make sstrip` to run sstrip for aggressive ELF size reduction.  
