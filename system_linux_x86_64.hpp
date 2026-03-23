@@ -21,7 +21,7 @@ namespace _system {
   UNREACHABLE();
 }
 
-inline bool has_randr_support() {
+inline bool has_rdrand_support() {
   unsigned int eax, ebx, ecx, edx;
   if (__get_cpuid(1, &eax, &ebx, &ecx, &edx)) {
     if (ecx & (1 << 30)) {
@@ -31,7 +31,7 @@ inline bool has_randr_support() {
   return false;
 }
 
-inline uintptr_t get_randr_value() {
+inline uintptr_t get_rdrand_value() {
   uintptr_t val;
   unsigned char succeed;
   do {

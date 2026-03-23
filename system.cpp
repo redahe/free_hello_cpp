@@ -28,9 +28,9 @@ uintptr_t __stack_chk_guard = 0xD100B22CA55DF88D;
 }
 
 void init() {
-  if (_system::has_randr_support()) {
+  if (_system::has_rdrand_support()) {
     // Change the canary value to a random value to be more secure
-    __stack_chk_guard = _system::get_randr_value();
+    __stack_chk_guard = _system::get_rdrand_value();
   }
 }
 
