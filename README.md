@@ -16,8 +16,8 @@ SOFTWARE.
 supports compilation for other POSIX systems by falling back to the hosted
 implementation.
 Includes inline asm for necessary syscall invocations and a CMake script
-focused on optimizing the binary size (**it by default gives up many
-security protections**, which can be tweaked in the settings).
+focused on optimizing the binary size (**note: achieving the minimal size requires giving up 
+many security features provided by the compiler**).
 
 
 ## Motivation
@@ -25,7 +25,7 @@ security protections**, which can be tweaked in the settings).
    Tiny single-user programs like "Hello, World!" should not be larger than a
 kilobyte in the compiled form by default. This project achieves this goal -
 on the target platform, with all security features disabled the program payload
-in the resulting executable is only 49 bytes of the machine code identical
+in the resulting executable is only 48 bytes of the machine code identical
 to the one that would be produced by a handcrafted assembly code,
 the ELF binary size is 512 bytes, 225 bytes after sstrip and could be reduced
 further by messing with the ELF program headers.
@@ -39,25 +39,29 @@ management, demoscene.
 
 ## The default security settings
 
-By default the program compiles with the following compiler and linker
-flags, which disable the standard security features in the compiled
-code and the executable in order to decrease the result binary size:
+By default the program builds with the -static flag preventing any dynamic
+linking, so RELRO is disabled. No other security features are disabled by default,
+however when compiled for the freestanding implementation (on Linux x86_64) 
+it uses a custom stack protector implementation, which can be found in 
+`system.cpp` (as the libc version not available).
+
+When the project is configured to disable all security features in order to
+achieve the minimal binary size the following flags are used:
 
   -fno-stack-protector  
   -fcf-protection=none  
   -Wl,-z,norelro  
   -Wl,-z,noseparate-code  
-  -Wl,-z,common-page-size=16  
 
-Remove/change these settings if the security aspect is important,
-(the stack protector relies on functions/variables defined in libc
-which need to be ported or re-implemented in the freestanding mode).
 
 ## Build instructions
 
 Requirements: make, cmake, c++17 or above.  
 Optional: strip, sstrip (for minimizing the binary size).
 
+
+Optionally run `make conf_no_security` to disable all 
+security features to achieve the minimal binary size.
 
 Run `make` from the project directory to build the project.  
 Run `make sstrip` to run sstrip for aggressive ELF size reduction.  

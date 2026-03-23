@@ -21,6 +21,6 @@ namespace _system {
   return ret;
 }
 
-void inline exit(const int status) { std::exit(status); }
+[[noreturn]] void inline exit(const int status) { std::exit(status); }
 
 } // namespace _system

@@ -21,6 +21,10 @@ $(BUILD_DIR): CMakeLists.txt
 
 configure: $(BUILD_DIR)
 
+conf_no_security:
+	@echo "$(BLUE)Running CMake:$(RESET)"
+	cmake -DREDUCE_SECURITY_FOR_BIN_SIZE=ON -B $(BUILD_DIR) -S .
+
 
 MAKEFLAGS := --no-print-directory 
 export MAKEFLAGS
@@ -41,16 +45,24 @@ clean:
 	@echo "$(YELLOW)Cleaning the build directory: $(BUILD_DIR)$(RESET)"
 	rm -rf $(BUILD_DIR)
 
-debug: build
+debug:
+	@echo "$(BLUE)Building the project for Debug$(RESET)"
+	cmake -DDEBUG_BUILD=ON -B $(BUILD_DIR) -S .
+	cmake --build $(BUILD_DIR) -j $(shell nproc)
 	@echo "$(YELLOW)Launching Debugger:$(RESET)"
 	$(DEBUGGER) $(BIN_PATH)
+	@echo "$(RED)Cleaning debug build$(RESET)"
+	rm -rf $(BUILD_DIR)
 
 size: build
+	@echo "-------------------------------------------"
+	@echo "$(YELLOW)ELF segments $(RESET)"
+	@readelf -l $(BIN_PATH)
 	@echo "-------------------------------------------"
 	@echo "$(YELLOW)ELF sections headers:$(RESET)"
 	@readelf -S $(BIN_PATH)
 	@echo "-------------------------------------------"
-	@echo "$(YELLOW) Runtime sections $(RESET)"
+	@echo "$(YELLOW) Section sizes $(RESET)"
 	@size -A $(BIN_PATH)
 	@echo "-------------------------------------------"
 	@echo "$(YELLOW)Total binary size:$(RESET)" `stat -c %s $(BIN_PATH)` "bytes"
@@ -86,10 +98,13 @@ compcheck: clean
 	@echo "$(BLUE) RUN 'make clean' TO RESET $(BLUE)"
 
 help:
+
+	@echo "make conf_no_security    - Configure the project to disable"\
+		                " security features (to minimize the bin size)"
 	@echo "make build       - Compile the project"
 	@echo "make run         - Build and execute"
 	@echo "make clean       - Delete buid artifacts"
-	@echo "make size        - Binary size statistics"
+	@echo "make size        - Elf size statistics"
 	@echo "make sstrip      - Run sstrip for aggressive ELF size reduction"
 	@echo "make debug       - Open in debugger ($(DEBUGGER))"
 	@echo "make check       - Run static analysis ($(CHECKER))"
